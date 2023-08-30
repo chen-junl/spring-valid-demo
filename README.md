@@ -66,7 +66,83 @@
       * 对@RequestParam和@PathVariable的参数判断
       * 对get请求对象,对get请求表单判断
       * 对post/put/delete请求@RequestBody判断
-
+# 具体拦截方法
+## 对get请求 @RequestParam和PathVariable类型参数校验
+```java
+//注意:使用@RequestParam 或者@PathVariable 的方式传递参数,必须在类上添加@Validated注解
+@Validated
+public class StudentWebValidatedController {
+    /**
+     * get请求url参数或者 form表单参数,必须在class上添加@Validated才能生效
+     *
+     * @param id
+     * @return
+     */
+    @GutMapping
+    public StudentValidatedDto findById(@Min(value = 1, message = "id不能小于1") @RequestParam Integer id,
+                                        @Min(value = 1, message = "id不能小于1") @PathVariable Integer id) {
+        return null;
+    }
+}
+```
+## 对get请求 对象类型参数校验
+```java
+@Validated
+public class StudentWebValidatedController {
+    /**
+     * get请求对象
+     *
+     * @param dto
+     * @return
+     */
+    @GetMapping(value = "query")
+    public List<StudentValidatedDto> query(@Validated StudentValidatedDto dto) {
+        return null;
+    }
+}
+@Data
+public class StudentValidatedDto {
+    /**
+     * 主键
+     */
+    @NotNull(message = "学生id不能为空")
+    private Integer id;
+    /**
+     * 标题
+     */
+    @NotEmpty(message = "学生名称不能为空")
+    private String title;
+}
+```
+## 对post,put,delete请求 对象类型参数校验
+```java
+@Validated
+public class StudentWebValidatedController {
+    /**
+     * body参数
+     *
+     * @param dto
+     * @return
+     */
+    @PostMapping
+    public boolean insert(@Validated @RequestBody StudentValidatedDto dto) {
+        return null;
+    }
+}
+@Data
+public class StudentValidatedDto {
+    /**
+     * 主键
+     */
+    @NotNull(message = "学生id不能为空")
+    private Integer id;
+    /**
+     * 标题
+     */
+    @NotEmpty(message = "学生名称不能为空")
+    private String title;
+}
+```
 # 常见疑问点
 ## `spring-boot-starter-validation`依赖是否是必须的,为什么有些项目没有引入也可以使用统一验证
     1. 在springboot2.3之前是默认引入`spring-boot-starter-web`的,但是在2.3之后需要用户自行选择是否需要添加进来
