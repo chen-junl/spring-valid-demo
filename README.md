@@ -60,7 +60,7 @@
       </dependency>
 
     2. 添加异常校验处理 处理参数校验产生的异常
-![img_1](https://github.com/chen-junl/spring-valid-demo/assets/38237837/479d629a-13a0-4f74-8cf5-aec45ebc5590)
+![img](/src/main/resources/static/img.png)
 
     3. 对方法参数进行拦截判断
       * 对@RequestParam和@PathVariable的参数判断
@@ -70,10 +70,10 @@
 # 常见疑问点
 ## `spring-boot-starter-validation`依赖是否是必须的,为什么有些项目没有引入也可以使用统一验证
     1. 在springboot2.3之前是默认引入`spring-boot-starter-web`的,但是在2.3之后需要用户自行选择是否需要添加进来
-![img_2](https://github.com/chen-junl/spring-valid-demo/assets/38237837/ad2514a2-2012-408f-99c8-543e9a73ae44)
+![img_2](/src/main/resources/static/img_2.png)
 
     2. 真正实现统一拦截校验的是`hibernate-validator`,所以如果项目中已经引入`hibernate-validator`,就可以直接使用统一验证
-![img_3](https://github.com/chen-junl/spring-valid-demo/assets/38237837/f9212814-047d-4da0-8680-fb77e90c1f13)
+![img_3](/src/main/resources/static/img_1.png)
 
 # 参考文档
 ## spring-validation教程
