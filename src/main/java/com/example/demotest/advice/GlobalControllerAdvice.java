@@ -25,20 +25,6 @@ import java.util.stream.Collectors;
 public class GlobalControllerAdvice {
 
     /**
-     * 参数校验异常 @RequestBody中的参数校验异常
-     *
-     * @param ex
-     * @return
-     */
-    @ExceptionHandler({MethodArgumentNotValidException.class})
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public BaseResponseDto<Object> methodArgumentNotValidException(MethodArgumentNotValidException ex) {
-        List<String> errorMessage = ex.getBindingResult().getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.toList());
-        log.warn("参数校验异常", ex);
-        return new BaseResponseDto<>("参数校验错误", errorMessage);
-    }
-
-    /**
      * 参数校验异常 @RequestParam和@PathVariable中的参数校验异常
      *
      * @param ex
@@ -53,7 +39,7 @@ public class GlobalControllerAdvice {
     }
 
     /**
-     * 参数校验异常 get请求中对象的形式 或者form表单形式 的参数校验异常
+     * 参数校验异常 get请求中对象的形式 或者form表单形式 @RequestBody对象的形式 的参数校验异常
      *
      * @param ex
      * @return
